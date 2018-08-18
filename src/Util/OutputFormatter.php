@@ -6,12 +6,18 @@ use App\Entity\Team;
 
 class OutputFormatter
 {
+    /**
+     * @param mixed $formattableInstance
+    */
     public function __construct($formattableInstance)
     {
         $this->instance = $formattableInstance;
         $this->formattableClass = get_class($formattableInstance);
     }
 
+    /**
+     * @return array
+    */
     public function getOutput(): array
     {
         switch ($this->formattableClass) {
@@ -21,6 +27,11 @@ class OutputFormatter
         }
     }
 
+    /**
+     * @param League $league
+     * 
+     * @return array
+    */
     public function formatLeague(League $league): array
     {
         return [
@@ -30,6 +41,11 @@ class OutputFormatter
         ];
     }
 
+    /**
+     * @param Team $team
+     * 
+     * @return array
+    */
     public function formatTeam(Team $team): array
     {
         return [

@@ -5,6 +5,12 @@ use App\Entity\Team;
 
 class EntityUpdater
 {
+    /**
+     * @param Team $team
+     * @param array $update
+     * 
+     * @return Team
+    */
     public static function applyUpdateToTeam(Team $team, array $update): Team
     {
         if (array_key_exists('name', $update)) {

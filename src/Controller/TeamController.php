@@ -20,6 +20,11 @@ class TeamController extends AbstractController
 {
     /**
      * @Route("/team/{slug}", name="team", methods={"GET"})
+     * 
+     * @param string $slug
+     * @param ObjectManager $em
+     * 
+     * @return JsonResponse
      */
     public function index(string $slug, ObjectManager $em)
     {
@@ -42,6 +47,11 @@ class TeamController extends AbstractController
 
     /**
      * @Route("/team/create", name="team-create", methods={"POST"})
+     * 
+     * @param ObjectManager $em 
+     * @param Request $request 
+     *
+     * @return JsonResponse
      */
     public function createTeam(ObjectManager $em, Request $request)
     {
@@ -68,6 +78,11 @@ class TeamController extends AbstractController
 
     /**
      * @Route("/team/delete/{slug}", name="team-delete", methods={"POST"})
+     * 
+     * @param string $slug 
+     * @param ObjectManager $em 
+     *
+     * @return JsonResponse
      */
     public function deleteTeam(string $slug, ObjectManager $em)
     {
@@ -94,6 +109,12 @@ class TeamController extends AbstractController
 
     /**
      * @Route("/team/{slug}", name="team-update", methods={"POST"})
+     * 
+     * @param string $slug 
+     * @param ObjectManager $em 
+     * @param Request $request 
+     * 
+     * @return JsonResponse
      */
     public function updateTeam(string $slug, ObjectManager $em, Request $request)
     {

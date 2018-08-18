@@ -18,6 +18,8 @@ class LeagueController extends AbstractController
 {
     /**
      * @Route("/league/server-health", name="league-server-health", methods={"GET"})
+     * 
+     * @return JsonResponse 
      */
     public function serverHealth()
     {
@@ -30,6 +32,11 @@ class LeagueController extends AbstractController
 
     /**
      * @Route("/league/delete/{slug}", name="league-delete", methods={"POST"})
+     * 
+     * @param string $slug 
+     * @param ObjectManager $em 
+     * 
+     * @return JsonResponse
      */
     public function deleteLeague(string $slug, ObjectManager $em)
     {
@@ -68,6 +75,11 @@ class LeagueController extends AbstractController
 
     /**
      * @Route("/league/{slug}", name="league", methods={"GET"})
+     * 
+     * @param string $slug 
+     * @param ObjectManager $em 
+     * 
+     * @return JsonResponse
      */
     public function index(string $slug, ObjectManager $em)
     {
