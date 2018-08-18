@@ -14,7 +14,44 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class LeagueController extends AbstractController
 {
     /**
-     * @Route("/league/{slug}", name="league")
+     * @Route("/league/delete/{slug}", name="league-delete", methods={"POST"})
+     */
+    public function deleteLeague(string $slug, ObjectManager $em)
+    {
+        $leagueRepository = $em->getRepository(League::class);
+        $leagueList = $leagueRepository
+            ->findBySlug($slug);
+        if(0 == count($leagueList)) {
+            $errorResponse = new JsonResponse(
+                [
+                    'error' => sprintf('there is no league with slug %s', $slug)
+                ],
+                JsonResponse::HTTP_NOT_FOUND
+            );
+            return $errorResponse;
+        }
+
+        $league = array_shift($leagueList);
+
+        //@todo write a Util method for clearing the teams
+        $league->getTeams()->map(
+            function(Team $team) {
+                $team->setLeague(null);
+            }
+        );
+
+        $em->remove($league);
+        $em->flush();
+        
+        return new JsonResponse([
+            'status' => 'SUCCESS'
+        ],
+            JsonResponse::HTTP_OK
+        );
+    }
+
+    /**
+     * @Route("/league/{slug}", name="league", methods={"GET"})
      */
     public function index(string $slug, ObjectManager $em)
     {
