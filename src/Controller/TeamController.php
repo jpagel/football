@@ -26,8 +26,7 @@ class TeamController extends AbstractController
         $teamList = $em
                     ->getRepository(Team::class)
                     ->findBySlug($slug);
-        if(0 == count($teamList))
-        {
+        if (0 == count($teamList)) {
             return new JsonResponse(
                 [
                     'error' => sprintf('there is no team with slug %s', $slug)
@@ -48,10 +47,10 @@ class TeamController extends AbstractController
     {
         $teamData = json_decode($request->getContent(), true);
         $team = TeamFactory::create($teamData, $em);
-        try{
+        try {
             $em->persist($team);
             $em->flush();
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             return new JsonResponse(
                 [
                     'error' => $e->getMessage()
@@ -75,8 +74,7 @@ class TeamController extends AbstractController
         $teamList = $em
                     ->getRepository(Team::class)
                     ->findBySlug($slug);
-        if(0 == count($teamList))
-        {
+        if (0 == count($teamList)) {
             return new JsonResponse(
                 [
                     'error' => sprintf('there is no team with slug %s', $slug)
@@ -86,7 +84,8 @@ class TeamController extends AbstractController
         }
         $em->remove(array_shift($teamList));
         $em->flush();
-        return new JsonResponse([
+        return new JsonResponse(
+            [
                 'status' => 'SUCCESS'
             ],
             JsonResponse::HTTP_OK
@@ -101,8 +100,7 @@ class TeamController extends AbstractController
         $teamList = $em
                     ->getRepository(Team::class)
                     ->findBySlug($slug);
-        if(0 == count($teamList))
-        {
+        if (0 == count($teamList)) {
             return new JsonResponse(
                 [
                     'error' => sprintf('there is no team with slug %s', $slug)
@@ -115,7 +113,8 @@ class TeamController extends AbstractController
         $team = EntityUpdater::applyUpdateToTeam($team, $update);
         $em->persist($team);
         $em->flush();
-        return new JsonResponse([
+        return new JsonResponse(
+            [
                 'status' => 'SUCCESS'
             ],
             JsonResponse::HTTP_OK

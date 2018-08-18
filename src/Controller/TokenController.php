@@ -14,7 +14,7 @@ class TokenController extends AbstractController
     /**
      * for now we will just return a token to anyone who asks:
      * user authentication can be plugged in later
-     * 
+     *
      * @Route("/token", name="new-token", methods={"POST"})
      */
     public function newToken(JWTEncoderInterface $jwtEncoder, UserProviderInterface $userProvider)

@@ -16,7 +16,7 @@ class AppFixtures extends Fixture
         $league->setSlug($this->sluggify($leagueName));
         $manager->persist($league);
         $manager->flush();
-        for($i = 0; $i < 5; $i++) {
+        for ($i = 0; $i < 5; $i++) {
             $team = new Team();
             $name = sprintf('%s United', chr(65 + $i));
             $slug = $this->sluggify($name);

@@ -3,16 +3,17 @@ namespace App\Util;
 
 use App\Entity\Team;
 
-class EntityUpdater {
+class EntityUpdater
+{
     public static function applyUpdateToTeam(Team $team, array $update): Team
     {
-        if(array_key_exists('name', $update)) {
+        if (array_key_exists('name', $update)) {
             $team->setName($update['name']);
         }
-        if(array_key_exists('slug', $update)) {
+        if (array_key_exists('slug', $update)) {
             $team->setSlug($update['slug']);
         }
-        if(array_key_exists('strip', $update)) {
+        if (array_key_exists('strip', $update)) {
             $team->setStrip($update['strip']);
         }
         return $team;

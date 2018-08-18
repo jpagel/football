@@ -36,7 +36,7 @@ class LeagueController extends AbstractController
         $leagueRepository = $em->getRepository(League::class);
         $leagueList = $leagueRepository
             ->findBySlug($slug);
-        if(0 == count($leagueList)) {
+        if (0 == count($leagueList)) {
             $errorResponse = new JsonResponse(
                 [
                     'error' => sprintf('there is no league with slug %s', $slug)
@@ -50,7 +50,7 @@ class LeagueController extends AbstractController
 
         //@todo write a Util method for clearing the teams
         $league->getTeams()->map(
-            function(Team $team) {
+            function (Team $team) {
                 $team->setLeague(null);
             }
         );
@@ -58,7 +58,8 @@ class LeagueController extends AbstractController
         $em->remove($league);
         $em->flush();
         
-        return new JsonResponse([
+        return new JsonResponse(
+            [
             'status' => 'SUCCESS'
         ],
             JsonResponse::HTTP_OK
@@ -73,7 +74,7 @@ class LeagueController extends AbstractController
         $leagueList = $em
             ->getRepository(League::class)
             ->findBySlug($slug);
-        if(0 == count($leagueList)) {
+        if (0 == count($leagueList)) {
             $errorResponse = new JsonResponse(
                 [
                     'error' => sprintf('there is no league with slug %s', $slug)
@@ -91,7 +92,7 @@ class LeagueController extends AbstractController
         $leagueFormatter = new OutputFormatter($league);
 
         $formattedTeams = array_map(
-            function($team) {
+            function ($team) {
                 return (new OutputFormatter($team))->getOutput();
             },
             $teams

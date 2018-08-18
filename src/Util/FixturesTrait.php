@@ -6,7 +6,8 @@ use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\Common\DataFixtures\Loader;
 
-trait FixturesTrait {
+trait FixturesTrait
+{
     protected function loadFixtures()
     {
         static::$kernel = static::createKernel();
