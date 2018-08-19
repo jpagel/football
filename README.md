@@ -17,7 +17,7 @@ This is a small API project written using Symfony 4.1 and Doctrine. The task was
 - create a mysql user and database, and edit the DATABASE_URL string in .env accordingly
 - build the database schema ```./bin/console doctrine:schema:create```
 - run the fixtures ```./bin/console doctrine:fixtures:load```
-- configure the Lexik JWT keys as explained in [https://github.com/lexik/LexikJWTAuthenticationBundle/blob/master/Resources/doc/index.md#installation]
+- configure the Lexik JWT keys as explained in https://github.com/lexik/LexikJWTAuthenticationBundle/blob/master/Resources/doc/index.md#installation
 - run the dev server ```./bin/console server:run```
 - you should get a happy message by visiting `http://localhost:8000\server-health`
 - make a new phpunit.xml by copying the phpunit.xml.dist
