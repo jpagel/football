@@ -1,0 +1,96 @@
+FORMAT: 1A
+
+# Check the server is up [/server-health]
+## GET 
++ Response 200 (text/json)
+
+        {"status":"OK"}
+
+
+# Claim a new Json Web Token [/token]
+## POST 
++ Response 200 (text/json)
+
+        {"token":"eyJ0eXAilongencryptedtokenEGTOBpeIoV7_x1PPMsGJ7k"}
+
+# Delete a League [/api/v1/league/delete/{slug}]
+
++ Parameters
+    + slug - unique identifier for the league
+
+## POST
+
+    + Headers
+
+            Authorization: Bearer [encrypted-jwt]
+
++ Response 200 (text/json)
+
+        {"status":"SUCCESS"}
+
+# View a League [/api/v1/league/{slug}]
+
++ Parameters
+    + slug - unique identifier for the league
+
+## GET
+
+    + Headers
+
+            Authorization: Bearer [encrypted-jwt]
++ Response 200 (text/json)
+
+        {"league":{"id":167,"name":"Premier League","slug":"premier_league"},"teams":[{"id":852,"name":"A United","slug":"a_united","strip":"strip_for_a_united"},{"id":853,"name":"B United","slug":"b_united","strip":"strip_for_b_united"},{"id":854,"name":"C United","slug":"c_united","strip":"strip_for_c_united"},{"id":855,"name":"D United","slug":"d_united","strip":"strip_for_d_united"},{"id":856,"name":"E United","slug":"e_united","strip":"strip_for_e_united"}]}
+
+# View or Update a team [/api/v1/team/{slug}]
+
++ Parameters
+    + slug - unique identifier for the team
+
+## GET
+
+    + Headers
+
+            Authorization: Bearer [encrypted-jwt]
+
++ Response 200 (text/json)
+
+        {"team":{"id":926,"name":"C United","slug":"c_united","strip":"strip_for_c_united"}}
+
+## POST
++ Request Update JSON Message (application/json)
+
+        {"name":"Updated United","strip":"strip-mark-ii"}
+
++ Response 200 (text/json)
+
+        {"status":"SUCCESS"}
+
+# Create a team [/api/v1/team/create]
+## POST 
+
+    + Headers
+
+            Authorization: Bearer [encrypted-jwt]
+
++ Request Update JSON Message (application/json)
+
+        {"name":"New Town City","strip":"new-town-city-strip","slug":"new-town-city"}
+
++ Response 201 (text/json)
+
+        {"id":965}
+
+# Delete a team [/api/v1/team/delete/{slug}]
+
++ parameters
+    + slug - unique identifier for the team
+
+## POST 
+
+    + Headers
+
+            Authorization: Bearer [encrypted-jwt]
++ Response 200 (text/json)
+
+        {"status":"SUCCESS"}
