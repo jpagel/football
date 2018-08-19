@@ -17,14 +17,6 @@ class LeagueControllerTest extends WebTestCase
         parent::setUp();
     }
 
-
-    public function testServerHealth()
-    {
-        $response = $this->authenticatedClient->get('/api/v1/league/server-health');
-        $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals('OK', json_decode($response->getBody())->status);
-    }
-
     public function testTeamList()
     {
         $this->loadFixtures();

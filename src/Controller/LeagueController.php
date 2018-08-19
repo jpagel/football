@@ -17,20 +17,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class LeagueController extends AbstractController
 {
     /**
-     * @Route("/league/server-health", name="league-server-health", methods={"GET"})
-     * 
-     * @return JsonResponse 
-     */
-    public function serverHealth()
-    {
-        return new JsonResponse(
-            [
-                'status' => 'OK'
-            ]
-        );
-    }
-
-    /**
      * @Route("/league/delete/{slug}", name="league-delete", methods={"POST"})
      * 
      * @param string $slug 
