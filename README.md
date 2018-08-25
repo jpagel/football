@@ -30,7 +30,7 @@ A few obvious things that still need tidying up:
 
 - There is no clear distinction between the test and dev environments. The functional tests (in `tests/Controller`) rely on a running instance of the dev server. It would be better if the server were running in test env and the tests wrote their fixtures to the test db.
 - There is some copied-and-pasted logic in the controllers (to do with generating 404s when entities are not found) which should be removed to a utility method.
-- There is logic in the League controller for detaching teams. This makes the controller a little too fat for comfort. It should be removed to a utility or repository method.
+- ~~There is logic in the League controller for detaching teams. This makes the controller a little too fat for comfort. It should be removed to a utility or repository method.~~
 - The apib and the functional tests cover only happy paths. There should be tests and documentation also for cases where slugs are not found or db updates fail.
 - There is no api resource for changing the league to which a team belongs.
 - There is no api resource for creating a league.

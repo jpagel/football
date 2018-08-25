@@ -1,6 +1,7 @@
 <?php
 namespace App\Util;
 
+use App\Entity\League;
 use App\Entity\Team;
 
 class EntityUpdater
@@ -23,5 +24,15 @@ class EntityUpdater
             $team->setStrip($update['strip']);
         }
         return $team;
+    }
+
+    public static function detachAllTeams(League $league)
+    {
+        $league->getTeams()->map(
+            function (Team $team) {
+                $team->setLeague(null);
+            }
+        );
+        return $league;
     }
 }

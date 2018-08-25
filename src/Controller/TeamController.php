@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Team;
 use App\Entity\TeamFactory;
+use App\Exception\NotFoundException;
+use App\Util\EntityFinder;
 use App\Util\EntityUpdater;
 use App\Util\OutputFormatter;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -28,18 +30,17 @@ class TeamController extends AbstractController
      */
     public function index(string $slug, ObjectManager $em)
     {
-        $teamList = $em
-                    ->getRepository(Team::class)
-                    ->findBySlug($slug);
-        if (0 == count($teamList)) {
+        try {
+            $team = EntityFinder::findBySlug($em, Team::class, $slug);
+        } catch (NotFoundException $e) {
             return new JsonResponse(
                 [
-                    'error' => sprintf('there is no team with slug %s', $slug)
+                    'error' => $e->getMessage()
                 ],
                 JsonResponse::HTTP_NOT_FOUND
             );
         }
-        $teamFormatter = new OutputFormatter(array_shift($teamList));
+        $teamFormatter = new OutputFormatter($team);
         return new JsonResponse([
             'team' => $teamFormatter->getOutput()
         ]);
@@ -86,18 +87,17 @@ class TeamController extends AbstractController
      */
     public function deleteTeam(string $slug, ObjectManager $em)
     {
-        $teamList = $em
-                    ->getRepository(Team::class)
-                    ->findBySlug($slug);
-        if (0 == count($teamList)) {
+        try {
+            $team = EntityFinder::findBySlug($em, Team::class, $slug);
+        } catch (NotFoundException $e) {
             return new JsonResponse(
                 [
-                    'error' => sprintf('there is no team with slug %s', $slug)
+                    'error' => $e->getMessage()
                 ],
                 JsonResponse::HTTP_NOT_FOUND
             );
         }
-        $em->remove(array_shift($teamList));
+        $em->remove($team);
         $em->flush();
         return new JsonResponse(
             [
@@ -118,20 +118,18 @@ class TeamController extends AbstractController
      */
     public function updateTeam(string $slug, ObjectManager $em, Request $request)
     {
-        $teamList = $em
-                    ->getRepository(Team::class)
-                    ->findBySlug($slug);
-        if (0 == count($teamList)) {
+        try {
+            $team = EntityFinder::findBySlug($em, Team::class, $slug);
+        } catch (NotFoundException $e) {
             return new JsonResponse(
                 [
-                    'error' => sprintf('there is no team with slug %s', $slug)
+                    'error' => $e->getMessage()
                 ],
                 JsonResponse::HTTP_NOT_FOUND
             );
         }
-        $team = array_shift($teamList);
         $update = json_decode($request->getContent(), true);
-        $team = EntityUpdater::applyUpdateToTeam($team, $update);
+        EntityUpdater::applyUpdateToTeam($team, $update);
         $em->persist($team);
         $em->flush();
         return new JsonResponse(
