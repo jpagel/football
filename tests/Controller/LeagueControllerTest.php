@@ -27,6 +27,13 @@ class LeagueControllerTest extends WebTestCase
         $this->assertCount(5, $data['teams']);
     }
 
+    public function testUnknownLeagueResultsIn404()
+    {
+        $this->loadFixtures();
+        $response = $this->authenticatedClient->get('/api/v1/league/no_such_league', ['http_errors' => false]);
+        $this->assertEquals(404, $response->getStatusCode());
+    }
+
     public function testLeagueDelete()
     {
         $this->loadFixtures();

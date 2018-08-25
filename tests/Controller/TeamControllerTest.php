@@ -18,6 +18,13 @@ class TeamControllerTest extends WebTestCase
         parent::setUp();
     }
 
+    public function testUnknownTeamResultsIn404()
+    {
+        $this->loadFixtures();
+        $response = $this->authenticatedClient->get('/api/v1/team/no_such_team', ['http_errors' => false]);
+        $this->assertEquals(404, $response->getStatusCode());
+    }
+
     public function testGetTeamDetails()
     {
         $response = $this->authenticatedClient->get('/api/v1/team/c_united');
