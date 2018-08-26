@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class LeagueController extends AbstractController
 {
     /**
-     * @Route("/league/delete/{slug}", name="league-delete", methods={"POST"})
+     * @Route("/league/delete/{slug}", name="league-delete", methods={"DELETE"})
      * 
      * @param string $slug 
      * @param ObjectManager $em 

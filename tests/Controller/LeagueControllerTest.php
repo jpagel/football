@@ -37,7 +37,7 @@ class LeagueControllerTest extends WebTestCase
     public function testLeagueDelete()
     {
         $this->loadFixtures();
-        $response = $this->authenticatedClient->post('/api/v1/league/delete/premier_league');
+        $response = $this->authenticatedClient->delete('/api/v1/league/delete/premier_league');
         $this->assertEquals(200, $response->getStatusCode());
         $leagueResponse = $this->authenticatedClient->get('/api/v1/league/premier_league', ['http_errors' => false]);
         $this->assertEquals(404, $leagueResponse->getStatusCode());

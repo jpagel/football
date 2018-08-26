@@ -18,7 +18,7 @@ FORMAT: 1A
 + Parameters
     + slug - unique identifier for the league
 
-## POST
+## DELETE
 
     + Headers
 
@@ -57,7 +57,7 @@ FORMAT: 1A
 
         {"team":{"id":926,"name":"C United","slug":"c_united","strip":"strip_for_c_united"}}
 
-## POST
+## PATCH
 + Request Update JSON Message (application/json)
 
         {"name":"Updated United","strip":"strip-mark-ii"}
@@ -67,13 +67,13 @@ FORMAT: 1A
         {"status":"SUCCESS"}
 
 # Create a team [/api/v1/team/create]
-## POST 
+## PUT 
 
     + Headers
 
             Authorization: Bearer [encrypted-jwt]
 
-+ Request Update JSON Message (application/json)
++ Request JSON Message (application/json)
 
         {"name":"New Town City","strip":"new-town-city-strip","slug":"new-town-city"}
 
@@ -86,7 +86,7 @@ FORMAT: 1A
 + parameters
     + slug - unique identifier for the team
 
-## POST 
+## DELETE 
 
     + Headers
 

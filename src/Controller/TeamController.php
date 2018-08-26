@@ -47,7 +47,7 @@ class TeamController extends AbstractController
     }
 
     /**
-     * @Route("/team/create", name="team-create", methods={"POST"})
+     * @Route("/team/create", name="team-create", methods={"PUT"})
      * 
      * @param ObjectManager $em 
      * @param Request $request 
@@ -78,7 +78,7 @@ class TeamController extends AbstractController
     }
 
     /**
-     * @Route("/team/delete/{slug}", name="team-delete", methods={"POST"})
+     * @Route("/team/delete/{slug}", name="team-delete", methods={"DELETE"})
      * 
      * @param string $slug 
      * @param ObjectManager $em 
@@ -108,7 +108,7 @@ class TeamController extends AbstractController
     }
 
     /**
-     * @Route("/team/{slug}", name="team-update", methods={"POST"})
+     * @Route("/team/{slug}", name="team-update", methods={"PATCH"})
      * 
      * @param string $slug 
      * @param ObjectManager $em 

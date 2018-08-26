@@ -41,7 +41,7 @@ class TeamControllerTest extends WebTestCase
             'slug'  => 'testington_city',
             'strip' => 'testington_strip'
         ];
-        $response = $this->authenticatedClient->request('POST', '/api/v1/team/create', [ 'json' => $teamData]);
+        $response = $this->authenticatedClient->request('PUT', '/api/v1/team/create', [ 'json' => $teamData]);
         $this->assertEquals(201, $response->getStatusCode());
         $teamResponse = $this->authenticatedClient->get('/api/v1/team/testington_city');
         $this->assertEquals(200, $teamResponse->getStatusCode());
@@ -50,7 +50,7 @@ class TeamControllerTest extends WebTestCase
 
     public function testUpdateTeam()
     {
-        $response = $this->authenticatedClient->request('POST', '/api/v1/team/c_united', [ 'json' => ['name' => 'Cambridge Ecumenicals', 'strip' => 'golden_brown']]);
+        $response = $this->authenticatedClient->request('PATCH', '/api/v1/team/c_united', [ 'json' => ['name' => 'Cambridge Ecumenicals', 'strip' => 'golden_brown']]);
         $this->assertEquals(200, $response->getStatusCode());
         $teamResponse = $this->authenticatedClient->get('/api/v1/team/c_united');
         $teamData = json_decode($teamResponse->getBody(), true);
@@ -62,7 +62,7 @@ class TeamControllerTest extends WebTestCase
     {
         $teamResponse1 = $this->authenticatedClient->get('/api/v1/team/c_united');
         $this->assertEquals(200, $teamResponse1->getStatusCode());
-        $response = $this->authenticatedClient->request('POST', '/api/v1/team/delete/c_united');
+        $response = $this->authenticatedClient->request('DELETE', '/api/v1/team/delete/c_united');
         $this->assertEquals(200, $response->getStatusCode());
         $teamResponse2 = $this->authenticatedClient->get('/api/v1/team/c_united', ['http_errors' => false]);
         $this->assertEquals(404, $teamResponse2->getStatusCode());
